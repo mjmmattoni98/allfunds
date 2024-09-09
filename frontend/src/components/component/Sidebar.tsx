@@ -6,11 +6,7 @@ import {
 } from "@/components/ui/accordion";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
-import {
-  ChevronDownIcon,
-  Home,
-  Menu
-} from "lucide-react";
+import { ChevronDownIcon, Home, Menu, SquareStack } from "lucide-react";
 import Link from "next/link";
 import { Fragment, ReactNode } from "react";
 
@@ -31,17 +27,17 @@ type Submenu = {
 export function SidebarMenu() {
   const menus: Menu[] = [
     {
-      label: "Ofertas de trabajo",
-      name: "Listado",
+      label: "Noticias",
+      name: "Nuevas",
       icon: <Home size={15} className="mr-2" />,
-      href: "/users/job-offers",
+      href: "/",
     },
-    // {
-    //   label: "Discover",
-    //   name: "Browse",
-    //   icon: <SquareStack size={15} className="mr-2" />,
-    //   href: "#",
-    // },
+    {
+      label: "Noticias",
+      name: "Archivadas",
+      icon: <SquareStack size={15} className="mr-2" />,
+      href: "#",
+    },
     // {
     //   label: "Discover",
     //   name: "Radio",
