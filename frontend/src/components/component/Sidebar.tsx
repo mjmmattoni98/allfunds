@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/accordion";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
-import { ChevronDownIcon, Home, Menu, SquareStack } from "lucide-react";
+import { ChevronDownIcon, FolderArchive, Menu, Newspaper } from "lucide-react";
 import Link from "next/link";
 import { Fragment, ReactNode } from "react";
 
@@ -29,14 +29,14 @@ export function SidebarMenu() {
     {
       label: "Noticias",
       name: "Nuevas",
-      icon: <Home size={15} className="mr-2" />,
-      href: "/",
+      icon: <Newspaper size={15} className="mr-2" />,
+      href: "/news",
     },
     {
       label: "Noticias",
       name: "Archivadas",
-      icon: <SquareStack size={15} className="mr-2" />,
-      href: "#",
+      icon: <FolderArchive size={15} className="mr-2" />,
+      href: "/news/archived",
     },
     // {
     //   label: "Discover",

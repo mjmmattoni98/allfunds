@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Headset, Minus, Trash } from "lucide-react";
+import { Archive, Trash } from "lucide-react";
 
 export type NewSchema = {
   id: string;
@@ -31,7 +31,7 @@ export default function NewCard({
         </div>
         {!newSchema.archiveDate ? (
           <Button>
-            <Headset className="mr-2 h-4 w-4" />
+            <Archive className="mr-2 h-4 w-4" />
             Archivar
           </Button>
         ) : (
