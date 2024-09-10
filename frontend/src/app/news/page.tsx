@@ -1,40 +1,14 @@
-import NewCard, { NewSchema } from "@/components/component/NewCard";
+import NewsList from "@/components/component/NewsList";
 import TitlePage from "@/components/component/TitlePage";
 
-async function getData(): Promise<NewSchema[]> {
-  // Fetch data from your API here.
-  return [
-    {
-      id: "1",
-      title: "Title",
-      description: "Description",
-      date: new Date(),
-      content: "Content",
-      author: "Author",
-    },
-    {
-      id: "2",
-      title: "Title 2",
-      description: "Description",
-      date: new Date(),
-      content: "Content",
-      author: "Author 2",
-    },
-  ];
-}
-
 export default async function NewsPage() {
-  const news = await getData();
+  const showArchivedNews = false;
 
   return (
     <>
       <TitlePage title="Noticias" description="Las últimas noticias para ti" />
       <div className="py-4">
-        <div className="flex flex-col gap-4">
-          {news.map((newSchema) => (
-            <NewCard key={newSchema.id} newSchema={newSchema} />
-          ))}
-        </div>
+        <NewsList isArchived={showArchivedNews} />
       </div>
     </>
   );

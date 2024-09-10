@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -19,9 +21,15 @@ export type NewSchema = {
   archiveDate?: Date;
 };
 
+type NewCardProps = {
+  newSchema: NewSchema;
+  onAction: (id: string) => void;
+};
+
 export default function NewCard({
   newSchema,
-}: Readonly<{ newSchema: NewSchema }>) {
+  onAction,
+}: Readonly<NewCardProps>) {
   return (
     <Card className="mt-10">
       <CardHeader className="flex flex-row items-center justify-between">
@@ -29,15 +37,15 @@ export default function NewCard({
           <CardTitle>{newSchema.title}</CardTitle>
           <CardDescription>{newSchema.description}</CardDescription>
         </div>
-        {!newSchema.archiveDate ? (
-          <Button>
-            <Archive className="mr-2 h-4 w-4" />
-            Archivar
-          </Button>
-        ) : (
-          <Button>
+        {newSchema.archiveDate ? (
+          <Button onClick={() => onAction(newSchema.id)}>
             <Trash className="mr-2 h-4 w-4" />
             Eliminar
+          </Button>
+        ) : (
+          <Button onClick={() => onAction(newSchema.id)}>
+            <Archive className="mr-2 h-4 w-4" />
+            Archivar
           </Button>
         )}
       </CardHeader>
