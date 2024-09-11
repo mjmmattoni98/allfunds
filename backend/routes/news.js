@@ -72,9 +72,9 @@ const newsRouter = Router();
  *
  */
 newsRouter.get("/", async (req, res) => {
-  // const news = await News.find().sort({ date: -1 });
-  // res.json(news);
-  res.json({ message: "Hello World 3" });
+  const news = await News.find({ archiveDate: null }).sort({ date: -1 });
+  res.json(news);
+  // res.json({ message: "Hello World" });
 });
 
 /**
@@ -99,6 +99,57 @@ newsRouter.get("/archived", async (req, res) => {
     archiveDate: -1,
   });
   res.json(archivedNews);
+});
+
+/**
+ * @swagger
+ * /api/news/init:
+ *   post:
+ *     summary: Initialize the database with default news data
+ *     tags: [News]
+ *     responses:
+ *       200:
+ *         description: Database initialized with default news data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Database initialized with default news data
+ */
+newsRouter.post("/init", async (req, res) => {
+  const defaultNews = [
+    {
+      title: "News 1",
+      description: "Descripción 1",
+      date: new Date(),
+      content: "Content for news 1",
+      author: "Autor 1",
+    },
+    {
+      title: "News 2",
+      description: "Descripción 2",
+      date: new Date(),
+      content: "Content for news 2",
+      author: "Autor 2",
+    },
+    {
+      title: "News 3",
+      description: "Descripción 3",
+      date: new Date(),
+      content: "Content for news 3",
+      author: "Autor 3",
+    },
+  ];
+
+  try {
+    await News.insertMany(defaultNews);
+    res.json({ message: "Database initialized with default news data" });
+  } catch (error) {
+    res.status(500).json({ message: "Error initializing database", error });
+  }
 });
 
 /**
@@ -139,7 +190,7 @@ newsRouter.put("/:id/archive", async (req, res) => {
 /**
  * @swagger
  * /api/news/{id}:
- *   get:
+ *   delete:
  *     summary: Remove the new by id
  *     tags: [News]
  *     parameters:
