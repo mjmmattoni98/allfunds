@@ -2,6 +2,7 @@
 
 import NewCard, { NewSchema } from "@/components/component/NewCard";
 import { useEffect, useState } from "react";
+import EmptyItem from "./EmptyItem";
 
 async function getData(): Promise<NewSchema[]> {
   // Fetch data from your API here.
@@ -101,7 +102,7 @@ export default async function NewsList({ isArchived }: Readonly<NewListProps>) {
 
       // Fetch the updated list
       const updatedNews = await getDataArchived();
-      console.log("🚀 ~ handleAction ~ delete:", updatedNews)
+      console.log("🚀 ~ handleAction ~ delete:", updatedNews);
       setNews(updatedNews);
     } else {
       // Archive the item
@@ -111,20 +112,34 @@ export default async function NewsList({ isArchived }: Readonly<NewListProps>) {
 
       // Fetch the updated list
       const updatedNews = await getData();
-      console.log("🚀 ~ handleAction ~ archive:", updatedNews)
+      console.log("🚀 ~ handleAction ~ archive:", updatedNews);
       setNews(updatedNews);
     }
   };
 
   return (
     <div className="flex flex-col gap-4">
-      {news.map((newSchema) => (
-        <NewCard
-          key={newSchema.id}
-          newSchema={newSchema}
-          onAction={handleAction}
-        />
-      ))}
+      {news.length === 0 ? (
+        isArchived ? (
+          <EmptyItem
+            title="No hay noticias archivadas"
+            description="Parece que no tienes noticias archivadas."
+          />
+        ) : (
+          <EmptyItem
+            title="No hay noticias"
+            description="No hay noticias en este momento."
+          />
+        )
+      ) : (
+        news.map((newSchema) => (
+          <NewCard
+            key={newSchema.id}
+            newSchema={newSchema}
+            onAction={handleAction}
+          />
+        ))
+      )}
     </div>
   );
 }
