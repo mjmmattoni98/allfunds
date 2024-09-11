@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import EmptyItem from "./EmptyItem";
 
 async function getData(): Promise<NewSchema[]> {
-  // Fetch data from your API here.
   let data = await fetch("http://localhost:3000/api/news");
   let newsData = await data.json();
   newsData = newsData.map((news: any) => {
@@ -18,31 +17,11 @@ async function getData(): Promise<NewSchema[]> {
       author: news.author,
     };
   });
-  console.log("🚀 ~ getData ~ newsData:", newsData);
 
   return newsData;
-  // return [
-  //   {
-  //     id: "1",
-  //     title: "Title",
-  //     description: "Description",
-  //     date: new Date(),
-  //     content: "Content",
-  //     author: "Author",
-  //   },
-  //   {
-  //     id: "2",
-  //     title: "Title 2",
-  //     description: "Description",
-  //     date: new Date(),
-  //     content: "Content",
-  //     author: "Author 2",
-  //   },
-  // ];
 }
 
 async function getDataArchived(): Promise<NewSchema[]> {
-  // Fetch data from your API here.
   let data = await fetch("http://localhost:3000/api/news/archived");
   let newsData = await data.json();
   newsData = newsData.map((news: any) => {
@@ -57,20 +36,7 @@ async function getDataArchived(): Promise<NewSchema[]> {
     };
   });
 
-  console.log("🚀 ~ getData ~ newsData:", newsData);
-
   return newsData;
-  // return [
-  //   {
-  //     id: "3",
-  //     title: "Title 3",
-  //     description: "Description",
-  //     date: new Date(),
-  //     content: "Content",
-  //     author: "Author 3",
-  //     archiveDate: new Date(),
-  //   },
-  // ];
 }
 
 type NewListProps = {
@@ -102,7 +68,6 @@ export default async function NewsList({ isArchived }: Readonly<NewListProps>) {
 
       // Fetch the updated list
       const updatedNews = await getDataArchived();
-      console.log("🚀 ~ handleAction ~ delete:", updatedNews);
       setNews(updatedNews);
     } else {
       // Archive the item
@@ -112,7 +77,6 @@ export default async function NewsList({ isArchived }: Readonly<NewListProps>) {
 
       // Fetch the updated list
       const updatedNews = await getData();
-      console.log("🚀 ~ handleAction ~ archive:", updatedNews);
       setNews(updatedNews);
     }
   };
