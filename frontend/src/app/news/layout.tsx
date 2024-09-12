@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Noticias",
   description: "Las últimas noticias para ti",
 };
+
 function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div>
