@@ -38,53 +38,6 @@ export function SidebarMenu() {
       icon: <FolderArchive size={15} className="mr-2" />,
       href: "/news/archived",
     },
-    // {
-    //   label: "Discover",
-    //   name: "Radio",
-    //   icon: <RadioIcon size={15} className="mr-2" />,
-    //   href: "#",
-    // },
-    // {
-    //   label: "Library",
-    //   name: "Playlist",
-    //   icon: <Play size={15} className="mr-2" />,
-    //   href: "#",
-    //   submenu: [
-    //     {
-    //       name: "Playlist 1",
-    //       icon: <ListVideo size={15} className="mr-2" />,
-    //       href: "#",
-    //     },
-    //     {
-    //       name: "Playlist 2",
-    //       icon: <ListVideo size={15} className="mr-2" />,
-    //       href: "#",
-    //     },
-    //     {
-    //       name: "Playlist 3",
-    //       icon: <ListVideo size={15} className="mr-2" />,
-    //       href: "#",
-    //     },
-    //   ],
-    // },
-    // {
-    //   label: "Library",
-    //   name: "Songs",
-    //   icon: <Music size={15} className="mr-2" />,
-    //   href: "#",
-    // },
-    // {
-    //   label: "Library",
-    //   name: "Made for You",
-    //   icon: <User size={15} className="mr-2" />,
-    //   href: "#",
-    // },
-    // {
-    //   label: "Library",
-    //   name: "Artist",
-    //   icon: <Mic2 size={15} className="mr-2" />,
-    //   href: "#",
-    // },
   ];
 
   const uniqueLabels = Array.from(new Set(menus.map((menu) => menu.label)));
