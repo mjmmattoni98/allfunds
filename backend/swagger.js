@@ -13,11 +13,6 @@ const options = {
         name: "MIT",
         url: "https://spdx.org/licenses/MIT.html",
       },
-      contact: {
-        name: "mjmmattoni",
-        url: "https://mjmmattoni.com",
-        email: "mjmmattoni@email.com",
-      },
     },
     servers: [
       {

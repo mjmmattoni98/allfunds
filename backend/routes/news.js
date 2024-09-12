@@ -69,7 +69,7 @@ const newsRouter = Router();
  *               type: array
  *               items:
  *                 $ref: '#/components/schemas/NewSchema'
- *        500:
+ *       500:
  *         description: Internal server error
  */
 newsRouter.get("/", async (req, res) => {
@@ -96,7 +96,7 @@ newsRouter.get("/", async (req, res) => {
  *               type: array
  *               items:
  *                 $ref: '#/components/schemas/NewSchema'
- *        500:
+ *       500:
  *         description: Internal server error
  */
 newsRouter.get("/archived", async (req, res) => {
@@ -127,7 +127,7 @@ newsRouter.get("/archived", async (req, res) => {
  *                 message:
  *                   type: string
  *                   example: Database initialized with default news data
- *        500:
+ *       500:
  *         description: Internal server error
  */
 newsRouter.post("/init", async (req, res) => {
