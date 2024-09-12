@@ -4,7 +4,8 @@ const options = {
   definition: {
     openapi: "3.1.0",
     info: {
-      title: "LogRocket Express API with Swagger",
+      title:
+        "API with Swagger for document and testing the API REST of the news",
       version: "0.1.0",
       description:
         "This is a simple CRUD API application made with Express and documented with Swagger",
@@ -13,9 +14,9 @@ const options = {
         url: "https://spdx.org/licenses/MIT.html",
       },
       contact: {
-        name: "LogRocket",
-        url: "https://logrocket.com",
-        email: "info@email.com",
+        name: "mjmmattoni",
+        url: "https://mjmmattoni.com",
+        email: "mjmmattoni@email.com",
       },
     },
     servers: [
