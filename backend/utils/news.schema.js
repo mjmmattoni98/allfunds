@@ -1,11 +1,11 @@
 import { model, Schema } from "mongoose";
 
 const NewsSchema = new Schema({
-  title: String,
-  description: String,
+  title: { type: String, required: true },
+  description: { type: String, required: true },
   date: { type: Date, default: Date.now },
-  content: String,
-  author: String,
+  content: { type: String, required: true },
+  author: { type: String, required: true },
   archiveDate: { type: Date, default: null },
 });
 
