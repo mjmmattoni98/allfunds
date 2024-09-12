@@ -11,7 +11,7 @@
  *         - content
  *         - author
  *       properties:
- *         id:
+ *         _id:
  *           type: string
  *           description: The auto-generated id of the new
  *         title:
@@ -35,7 +35,7 @@
  *           format: date
  *           description: The date the book was archived
  *       example:
- *         id: d5fE_asz
+ *         _id: d5fE_asz
  *         title: La importancia de la lectura
  *         description: La lectura es una actividad fundamental para el desarrollo de las personas
  *         date: 2020-03-10T04:05:06.157Z
@@ -69,12 +69,16 @@ const newsRouter = Router();
  *               type: array
  *               items:
  *                 $ref: '#/components/schemas/NewSchema'
- *
+ *        500:
+ *         description: Internal server error
  */
 newsRouter.get("/", async (req, res) => {
-  const news = await News.find({ archiveDate: null }).sort({ date: -1 });
-  res.json(news);
-  // res.json({ message: "Hello World" });
+  try {
+    const news = await News.find({ archiveDate: null }).sort({ date: -1 });
+    res.status(200).json(news).end();
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" }).end();
+  }
 });
 
 /**
@@ -92,13 +96,18 @@ newsRouter.get("/", async (req, res) => {
  *               type: array
  *               items:
  *                 $ref: '#/components/schemas/NewSchema'
- *
+ *        500:
+ *         description: Internal server error
  */
 newsRouter.get("/archived", async (req, res) => {
-  const archivedNews = await News.find({ archiveDate: { $ne: null } }).sort({
-    archiveDate: -1,
-  });
-  res.json(archivedNews);
+  try {
+    const archivedNews = await News.find({ archiveDate: { $ne: null } }).sort({
+      archiveDate: -1,
+    });
+    res.status(200).json(archivedNews).end();
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" }).end();
+  }
 });
 
 /**
@@ -118,6 +127,8 @@ newsRouter.get("/archived", async (req, res) => {
  *                 message:
  *                   type: string
  *                   example: Database initialized with default news data
+ *        500:
+ *         description: Internal server error
  */
 newsRouter.post("/init", async (req, res) => {
   const defaultNews = [
@@ -146,9 +157,15 @@ newsRouter.post("/init", async (req, res) => {
 
   try {
     await News.insertMany(defaultNews);
-    res.json({ message: "Database initialized with default news data" });
+    res
+      .status(200)
+      .json({ message: "Database initialized with default news data" })
+      .end();
   } catch (error) {
-    res.status(500).json({ message: "Error initializing database", error });
+    res
+      .status(500)
+      .json({ message: "Error initializing database", error })
+      .end();
   }
 });
 
@@ -171,20 +188,45 @@ newsRouter.post("/init", async (req, res) => {
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/NewSchema'
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/NewSchema'
  *       404:
  *         description: The new was not found
+ *       400:
+ *         description: The new is already archived
  *       500:
  *         description: Some error happened
  *
  */
 newsRouter.put("/:id/archive", async (req, res) => {
-  const news = await News.findByIdAndUpdate(
-    req.params.id,
-    { archiveDate: new Date() },
-    { new: true }
-  );
-  res.json(news);
+  try {
+    const newId = req.params.id;
+    const news = await News.findById(newId);
+
+    if (!news) {
+      return res.status(404).json({ error: "News item not found" }).end();
+    }
+
+    if (news.archiveDate !== null) {
+      return res
+        .status(400)
+        .json({ error: "News item is already archived" })
+        .end();
+    }
+
+    news.archiveDate = new Date();
+    await news.save();
+
+    // Filter the updated news to only return those that are not archived
+    const nonArchivedNews = await News.find({ archiveDate: null }).sort({
+      date: -1,
+    });
+
+    res.status(200).json(nonArchivedNews).end();
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" }).end();
+  }
 });
 
 /**
@@ -203,13 +245,41 @@ newsRouter.put("/:id/archive", async (req, res) => {
  *     responses:
  *       200:
  *         description: The new was removed
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/NewSchema'
  *       404:
  *         description: The new was not found
- *
+ *       400:
+ *         description: The new can't be removed because is not archived
+ *       500:
+ *         description: Internal server error
  */
 newsRouter.delete("/:id", async (req, res) => {
-  await News.findByIdAndDelete(req.params.id);
-  res.status(204).send("Item removed").end();
+  try {
+    const news = await News.findById(req.params.id);
+    if (!news) {
+      return res.status(404).json({ error: "News item not found" }).end();
+    }
+
+    if (news.archiveDate === null) {
+      return res.status(400).json({ error: "News item is not archived" }).end();
+    }
+
+    await News.findByIdAndDelete(req.params.id);
+
+    // Fetch the updated list of archived news
+    const archivedNews = await News.find({ archiveDate: { $ne: null } }).sort({
+      archiveDate: -1,
+    });
+
+    res.status(200).json(archivedNews).end();
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" }).end();
+  }
 });
 
 export { newsRouter };
