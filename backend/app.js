@@ -5,6 +5,9 @@ import swaggerUi from "swagger-ui-express";
 import { newsRouter } from "./routes/news.js";
 import specs from "./swagger.js";
 import helmet from "helmet";
+import { configDotenv } from "dotenv";
+
+configDotenv();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
