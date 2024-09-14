@@ -1,8 +1,8 @@
-# Project Name
+# Frontend for News Application
 
 ## Overview
 
-This is the frontend for a news application that displays news from a NodeJS Express backend. The application is built with NextJS (React), TypeScript, and Tailwind CSS.
+This project is the frontend of a technical test for Allfunds. It is a news application that displays news items from an API. The application is built with Next.js, a React framework, and uses Tailwind CSS for styling.
 
 ## Project Structure
 
@@ -27,25 +27,7 @@ This is the frontend for a news application that displays news from a NodeJS Exp
     - `NewsList.tsx`: Component for listing news items.
     - `Sidebar.tsx`: Sidebar component.
     - `TitlePage.tsx`: Component for displaying a title page.
-  - `ui/`: Directory for UI elements.
-    - `accordion.tsx`: Accordion UI component.
-    - `alert-dialog.tsx`: Alert dialog UI component.
-
-- **src/lib/**: Contains utility functions.
-
-  - `utils.ts`: Utility functions used throughout the project.
-
-- **public/**: Public assets such as images and fonts.
-
-- **next.config.mjs**: Next.js configuration file.
-
-- **package.json**: Project dependencies and scripts.
-
-- **postcss.config.mjs**: PostCSS configuration file.
-
-- **tailwind.config.ts**: Tailwind CSS configuration file.
-
-- **tsconfig.json**: TypeScript configuration file.
+  - `ui/`: Directory for UI elements from shadcn ui.
 
 ## Getting Started
 
