@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is a web application built with Next.js and TypeScript. It includes a variety of components and utilities to create a dynamic and responsive user interface.
+This is the frontend for a news application that displays news from a NodeJS Express backend. The application is built with NextJS (React), TypeScript, and Tailwind CSS.
 
 ## Project Structure
 
