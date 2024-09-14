@@ -34,6 +34,7 @@ This will start the server and the MongoDB database in separate containers. The 
    ```
 
 3. Create a `.env` file in the root directory and add your environment variables (PORT is optional):
+
    ```env
    PORT=3000
    MONGODB_URI=mongodb://localhost:27017/allfunds
