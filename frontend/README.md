@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Project Name
+
+## Overview
+
+This project is a web application built with Next.js and TypeScript. It includes a variety of components and utilities to create a dynamic and responsive user interface.
+
+## Project Structure
+
+### Key Directories and Files
+
+- **src/app/**: Contains the main application files, including global styles and layout components.
+
+  - `globals.css`: Global CSS styles.
+  - `layout.tsx`: Main layout component.
+  - `news/`: Directory for news-related pages and components.
+    - `archived/page.tsx`: Archived news page.
+    - `layout.tsx`: Layout for news pages.
+    - `page.tsx`: Main news page.
+  - `page.tsx`: Main application page.
+
+- **src/components/**: Contains reusable UI components.
+
+  - `component/`: Directory for specific components.
+    - `EmptyItem.tsx`: Component for displaying an empty item.
+    - `Navbar.tsx`: Navigation bar component.
+    - `NewCard.tsx`: Card component for displaying news.
+    - `NewsList.tsx`: Component for listing news items.
+    - `Sidebar.tsx`: Sidebar component.
+    - `TitlePage.tsx`: Component for displaying a title page.
+  - `ui/`: Directory for UI elements.
+    - `accordion.tsx`: Accordion UI component.
+    - `alert-dialog.tsx`: Alert dialog UI component.
+
+- **src/lib/**: Contains utility functions.
+
+  - `utils.ts`: Utility functions used throughout the project.
+
+- **public/**: Public assets such as images and fonts.
+
+- **next.config.mjs**: Next.js configuration file.
+
+- **package.json**: Project dependencies and scripts.
+
+- **postcss.config.mjs**: PostCSS configuration file.
+
+- **tailwind.config.ts**: Tailwind CSS configuration file.
+
+- **tsconfig.json**: TypeScript configuration file.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js
+- npm or yarn
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+   ```sh
+   git clone <repository-url>
+   ```
 
-## Learn More
+2. Navigate to the project directory:
 
-To learn more about Next.js, take a look at the following resources:
+   ```sh
+   cd <project-directory>
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Install dependencies:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+   ```sh
+    npm install
+   ```
 
-## Deploy on Vercel
+### Development
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Start the development server:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   ```sh
+   npm run dev
+   ```
